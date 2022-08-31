@@ -75,8 +75,6 @@ nodes:
           ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
         actionType: CALL_CLIENT_FUNCTION
       callingSemantics: REACTIVE
-      onSuccess: ''
-      onFailure: ''
   852e186a-616e-4235-9081-f010a6b819ad:
     id: 852e186a-616e-4235-9081-f010a6b819ad
     type: SPINNER
@@ -102,9 +100,6 @@ nodes:
       data: '{{listDemosFilter.data}}'
       allowDownload: '{{true}}'
       downloadFormat: JSON
-      selectedRowIndex: ''
-      onSelectRow: ''
-      onDeselectRow: ''
       totalRowCount: '100'
   e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93:
     id: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
@@ -189,12 +184,8 @@ nodes:
           isVisible: true
           allowSortBy: true
           renderAs: default
-          dateTimeFormat: ''
       allowDownload: '{{true}}'
       downloadFormat: JSON
-      selectedRowIndex: ''
-      onSelectRow: ''
-      onDeselectRow: ''
       totalRowCount: '100'
   9fed30eb-735c-4607-89b7-eddde2137bb4:
     id: 9fed30eb-735c-4607-89b7-eddde2137bb4
@@ -221,8 +212,6 @@ nodes:
       width: '1'
       height: '2'
       text: Refresh
-      leftIcon: ''
-      rightIcon: ''
       backgroundColor: accent.purple.400
       onClick:
         function:
@@ -242,8 +231,6 @@ nodes:
     properties:
       callingSemantics: REACTIVE
       action:
-        keys: ''
-        select: ''
         targetNode:
           ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
         actionType: LIST_RECORDS
@@ -259,10 +246,6 @@ nodes:
       height: '4'
       label: Name
       labelStyle: top
-      leftIcon: ''
-      rightIcon: ''
-      onFocus: ''
-      onBlur: ''
   00043750-664a-41c8-ad8f-e46b876335ca:
     id: 00043750-664a-41c8-ad8f-e46b876335ca
     type: TEXT
@@ -291,10 +274,6 @@ nodes:
       height: '4'
       label: What would you like to present?
       labelStyle: top
-      leftIcon: ''
-      rightIcon: ''
-      onFocus: ''
-      onBlur: ''
   7f24f85c-defd-41c2-bf50-43adf49d6926:
     id: 7f24f85c-defd-41c2-bf50-43adf49d6926
     type: BUTTON
@@ -341,7 +320,6 @@ nodes:
               "name": "{{nameInput.value}}",
               "present": "{{presentInput.value}}"
           }
-        select: ''
         targetNode:
           ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
         actionType: SET_RECORD
@@ -349,7 +327,6 @@ nodes:
       onSuccess:
         function:
           ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
-      onFailure: ''
   d3654371-1c62-43b9-a0e3-08338969c9df:
     id: d3654371-1c62-43b9-a0e3-08338969c9df
     type: FUNCTION
@@ -366,8 +343,6 @@ nodes:
           ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
         actionType: CALL_CLIENT_FUNCTION
       debounceMillis: '{{ 0 }}'
-      onSuccess: ''
-      onFailure: ''
   967c7f4b-983b-41e2-8114-89a25f13fd99:
     id: 967c7f4b-983b-41e2-8114-89a25f13fd99
     type: RESOURCE/TYPESCRIPT_CLIENT
@@ -397,8 +372,6 @@ nodes:
         actionType: CALL_CLIENT_FUNCTION
       callingSemantics: REACTIVE
       debounceMillis: '{{ 0 }}'
-      onSuccess: ''
-      onFailure: ''
   786f1205-4e8f-42c2-b76d-2ec622d971e6:
     id: 786f1205-4e8f-42c2-b76d-2ec622d971e6
     type: TEMPLATE
@@ -423,15 +396,6 @@ nodes:
       width: '5'
       height: '2'
       overflow: auto
-      onMount: ''
-      onUnmount: ''
-      onClick: ''
-      onDoubleClick: ''
-      onWheel: ''
-      onHover: ''
-      onLeave: ''
-      onFocus: ''
-      onBlur: ''
   34da000a-5eb8-4f73-b361-e6afef7d18bc:
     id: 34da000a-5eb8-4f73-b361-e6afef7d18bc
     type: BUTTON
@@ -443,17 +407,6 @@ nodes:
       left: '7'
       width: '5'
       height: '2'
-      onMount: ''
-      onUnmount: ''
-      onClick: ''
-      onDoubleClick: ''
-      onWheel: ''
-      onHover: ''
-      onLeave: ''
-      onFocus: ''
-      onBlur: ''
-      leftIcon: ''
-      rightIcon: ''
   27929606-afca-4137-9a6c-dea9292ccf25:
     id: 27929606-afca-4137-9a6c-dea9292ccf25
     type: FORM
