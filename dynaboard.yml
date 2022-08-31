@@ -1,7 +1,7 @@
 runtimeVersion: 0.2.14
+name: Lightning Demos
+description: Signup sheet for weekly lightning demo presentations
 type: com.dynaboard/project
-name: Example Template
-description: Optional description of your template
 nodes:
   ROOT_NODE:
     id: ROOT_NODE
@@ -10,12 +10,468 @@ nodes:
     parentNodeID: ROOT_NODE
     parentSlot: ROOT_NODE
     slots:
-      pages:
-        - nodeID: bb071577-c4ea-4614-98e6-9ad31c233cbe
+      templates:
+        - nodeID: 786f1205-4e8f-42c2-b76d-2ec622d971e6
           orderKey: a0
-  bb071577-c4ea-4614-98e6-9ad31c233cbe:
-    id: bb071577-c4ea-4614-98e6-9ad31c233cbe
+      resources:
+        - nodeID: 967c7f4b-983b-41e2-8114-89a25f13fd99
+          orderKey: a2
+        - nodeID: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
+          orderKey: a3
+      pages:
+        - nodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+          orderKey: a0
+    properties:
+      selectedTheme: null
+      showDynaboardBranding: '{{false}}'
+      robotsTxt: null
+      timezone: America
+  df5c62e0-9076-45aa-b3d3-a73ca412fa9c:
+    id: df5c62e0-9076-45aa-b3d3-a73ca412fa9c
+    type: INLINE_REACT
+    name: inline_react1
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      top: '40'
+      width: '12'
+      height: '2'
+      componentSource: |-
+        const styles = {
+            height: "100%",
+            
+        }
+
+        return function Component() {
+          return (<div>
+                <hr />
+            </div>
+          )
+        }
+  a6d916b8-3a8f-498c-b528-110d679a9174:
+    id: a6d916b8-3a8f-498c-b528-110d679a9174
+    type: FUNCTION
+    name: todaysDemos
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: functions
+    properties:
+      action:
+        code: |-
+          const today = new Date()
+          today.setHours(0, 0, 0, 0)
+
+          const d = {{listDemos.data}}
+          return d.filter((entry) => {
+              return typeof entry.value !== 'string' && (new Date(entry.createdAt) > today)
+            }
+          ).map(d => {
+              console.log(JSON.stringify(d.value))
+              return {
+                  Date: d.key,
+                  Who: d.value.name,
+                  Demo: d.value.present
+              }}).reverse()
+        targetNode:
+          ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
+        actionType: CALL_CLIENT_FUNCTION
+      callingSemantics: REACTIVE
+      onSuccess: ''
+      onFailure: ''
+  852e186a-616e-4235-9081-f010a6b819ad:
+    id: 852e186a-616e-4235-9081-f010a6b819ad
+    type: SPINNER
+    name: spinner1
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      isVisible: '{{listDemos.loading}}'
+      top: '3'
+      left: '12'
+      width: '1'
+      height: '3'
+  c6eb633b-6db6-45a3-bfe9-97ff482344f0:
+    id: c6eb633b-6db6-45a3-bfe9-97ff482344f0
+    type: DATA_TABLE
+    name: data_table1
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      top: '42'
+      width: '12'
+      height: '17'
+      data: '{{listDemosFilter.data}}'
+      allowDownload: '{{true}}'
+      downloadFormat: JSON
+      selectedRowIndex: ''
+      onSelectRow: ''
+      onDeselectRow: ''
+      totalRowCount: '100'
+  e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93:
+    id: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
     type: PAGE
     name: index
     parentNodeID: ROOT_NODE
     parentSlot: pages
+    slots:
+      canvas:
+        - nodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+          orderKey: Zy
+        - nodeID: 9fed30eb-735c-4607-89b7-eddde2137bb4
+          orderKey: Zz
+        - nodeID: 152f4d81-531d-4b52-8544-f71bb0325602
+          orderKey: a0
+        - nodeID: df5c62e0-9076-45aa-b3d3-a73ca412fa9c
+          orderKey: a0
+        - nodeID: 852e186a-616e-4235-9081-f010a6b819ad
+          orderKey: a2
+        - nodeID: 33451c27-1db0-4025-9a2d-9a7c9dbdea40
+          orderKey: a3
+        - nodeID: 80dad1d7-398a-44d1-b723-da3c7c8fa1bd
+          orderKey: a4V
+        - nodeID: c6eb633b-6db6-45a3-bfe9-97ff482344f0
+          orderKey: a5
+      functions:
+        - nodeID: 43512de8-177b-4f6f-bcdc-61a5852c1963
+          orderKey: a0
+        - nodeID: d3654371-1c62-43b9-a0e3-08338969c9df
+          orderKey: a1
+        - nodeID: 7d405878-3db1-4a97-9d49-d7d15e39fb70
+          orderKey: a2
+        - nodeID: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
+          orderKey: a3
+        - nodeID: a6d916b8-3a8f-498c-b528-110d679a9174
+          orderKey: a4
+    properties:
+      padding: 16px
+      spacing: 16px
+      gridRowHeight: 16px
+  80dad1d7-398a-44d1-b723-da3c7c8fa1bd:
+    id: 80dad1d7-398a-44d1-b723-da3c7c8fa1bd
+    type: DATA_TABLE
+    name: data_table2
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      top: '20'
+      width: '12'
+      height: '19'
+      data: '{{todaysDemos.data}}'
+      columns:
+        - header: Date
+          accessor: Date
+          id: 7f515211-00ff-4236-bdf5-e6656fc9f6e7
+          width: auto
+          widthUnit: '%'
+          minWidthUnit: '%'
+          minWidth: 15
+          isVisible: true
+          allowSortBy: true
+          renderAs: default
+          dateTimeFormat: ''
+        - header: Who
+          accessor: Who
+          id: 0dadbea3-9c84-4174-947c-6f7e3cb0b7fa
+          width: auto
+          widthUnit: '%'
+          minWidthUnit: '%'
+          minWidth: 15
+          isVisible: true
+          allowSortBy: true
+          renderAs: default
+          dateTimeFormat: ''
+        - header: Demo
+          accessor: Demo
+          id: bd975e54-cba2-43f4-9c11-9be30b8babac
+          width: auto
+          widthUnit: '%'
+          minWidthUnit: '%'
+          minWidth: 15
+          isVisible: true
+          allowSortBy: true
+          renderAs: default
+          dateTimeFormat: ''
+      allowDownload: '{{true}}'
+      downloadFormat: JSON
+      selectedRowIndex: ''
+      onSelectRow: ''
+      onDeselectRow: ''
+      totalRowCount: '100'
+  9fed30eb-735c-4607-89b7-eddde2137bb4:
+    id: 9fed30eb-735c-4607-89b7-eddde2137bb4
+    type: TEXT
+    name: text3
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      top: '18'
+      width: '12'
+      height: '2'
+      overflow: auto
+      value: Today's Demos
+      fontSize: xl
+      textDecorationLine: underline
+  152f4d81-531d-4b52-8544-f71bb0325602:
+    id: 152f4d81-531d-4b52-8544-f71bb0325602
+    type: BUTTON
+    name: button2
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      left: '12'
+      width: '1'
+      height: '2'
+      text: Refresh
+      leftIcon: ''
+      rightIcon: ''
+      backgroundColor: accent.purple.400
+      onClick:
+        function:
+          ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
+  a51cd4f0-9d89-4c97-ba45-e20522cdfa61:
+    id: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
+    type: RESOURCE/KVSTORE
+    name: kvstore1
+    parentNodeID: ROOT_NODE
+    parentSlot: resources
+  718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7:
+    id: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
+    type: FUNCTION
+    name: listDemos
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: functions
+    properties:
+      callingSemantics: REACTIVE
+      action:
+        keys: ''
+        select: ''
+        targetNode:
+          ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
+        actionType: LIST_RECORDS
+  6c952348-bcf6-4547-bea3-b862a9c27b0b:
+    id: 6c952348-bcf6-4547-bea3-b862a9c27b0b
+    type: INPUT
+    name: nameInput
+    parentNodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+    parentSlot: canvas
+    properties:
+      top: '5'
+      width: '3'
+      height: '4'
+      label: Name
+      labelStyle: top
+      leftIcon: ''
+      rightIcon: ''
+      onFocus: ''
+      onBlur: ''
+  00043750-664a-41c8-ad8f-e46b876335ca:
+    id: 00043750-664a-41c8-ad8f-e46b876335ca
+    type: TEXT
+    name: text1
+    parentNodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+    parentSlot: canvas
+    properties:
+      overflow: auto
+      width: '12'
+      height: '4'
+      overflowX: hidden
+      overflowY: hidden
+      value: '### Sign-up'
+      renderMode: markdown
+      verticalAlign: center
+  c1e81210-9eec-4647-bd7b-9682a8bbe010:
+    id: c1e81210-9eec-4647-bd7b-9682a8bbe010
+    type: INPUT
+    name: presentInput
+    parentNodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+    parentSlot: canvas
+    properties:
+      top: '5'
+      left: '4'
+      width: '4'
+      height: '4'
+      label: What would you like to present?
+      labelStyle: top
+      leftIcon: ''
+      rightIcon: ''
+      onFocus: ''
+      onBlur: ''
+  7f24f85c-defd-41c2-bf50-43adf49d6926:
+    id: 7f24f85c-defd-41c2-bf50-43adf49d6926
+    type: BUTTON
+    name: button1
+    parentNodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+    parentSlot: canvas
+    properties:
+      isEnabled: '{{nameInput.value && presentInput.value}}'
+      top: '6'
+      left: '11'
+      width: '2'
+      height: '3'
+      text: Submit
+      backgroundColor: accent.purple.400
+      onClick:
+        function:
+          ref: d3654371-1c62-43b9-a0e3-08338969c9df
+  33451c27-1db0-4025-9a2d-9a7c9dbdea40:
+    id: 33451c27-1db0-4025-9a2d-9a7c9dbdea40
+    type: TEXT
+    name: text2
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    properties:
+      overflow: auto
+      width: '11'
+      height: '5'
+      overflowX: hidden
+      overflowY: hidden
+      value: '# ⚡ Dynaboard Lightning Demos'
+      renderMode: markdown
+      verticalAlign: center
+  7d405878-3db1-4a97-9d49-d7d15e39fb70:
+    id: 7d405878-3db1-4a97-9d49-d7d15e39fb70
+    type: FUNCTION
+    name: addSignUpRecord
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: functions
+    properties:
+      action:
+        key: '{{new Date().toString()}}'
+        value: |-
+          {
+              "name": "{{nameInput.value}}",
+              "present": "{{presentInput.value}}"
+          }
+        select: ''
+        targetNode:
+          ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
+        actionType: SET_RECORD
+      debounceMillis: '{{ 0 }}'
+      onSuccess:
+        function:
+          ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
+      onFailure: ''
+  d3654371-1c62-43b9-a0e3-08338969c9df:
+    id: d3654371-1c62-43b9-a0e3-08338969c9df
+    type: FUNCTION
+    name: addSignUp
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: functions
+    properties:
+      action:
+        code: |-
+          await addSignUpRecord()
+          nameInput.value = ""
+          presentInput.value = ""
+        targetNode:
+          ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
+        actionType: CALL_CLIENT_FUNCTION
+      debounceMillis: '{{ 0 }}'
+      onSuccess: ''
+      onFailure: ''
+  967c7f4b-983b-41e2-8114-89a25f13fd99:
+    id: 967c7f4b-983b-41e2-8114-89a25f13fd99
+    type: RESOURCE/TYPESCRIPT_CLIENT
+    name: typescript_client1
+    parentNodeID: ROOT_NODE
+    parentSlot: resources
+  43512de8-177b-4f6f-bcdc-61a5852c1963:
+    id: 43512de8-177b-4f6f-bcdc-61a5852c1963
+    type: FUNCTION
+    name: listDemosFilter
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: functions
+    properties:
+      action:
+        code: >-
+          return {{listDemos.data}}.filter(d => typeof d.value !==
+          'string').map(d => {
+              console.log(JSON.stringify(d.value))
+              return {
+                  Date: d.key,
+                  Who: d.value.name,
+                  Demo: d.value.present
+              }
+          })
+        targetNode:
+          ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
+        actionType: CALL_CLIENT_FUNCTION
+      callingSemantics: REACTIVE
+      debounceMillis: '{{ 0 }}'
+      onSuccess: ''
+      onFailure: ''
+  786f1205-4e8f-42c2-b76d-2ec622d971e6:
+    id: 786f1205-4e8f-42c2-b76d-2ec622d971e6
+    type: TEMPLATE
+    name: template1
+    parentNodeID: ROOT_NODE
+    parentSlot: templates
+    slots:
+      canvas:
+        - nodeID: 34da000a-5eb8-4f73-b361-e6afef7d18bc
+          orderKey: Zz
+        - nodeID: 49314df0-82a1-459a-9aeb-78bd377767e7
+          orderKey: a0
+  49314df0-82a1-459a-9aeb-78bd377767e7:
+    id: 49314df0-82a1-459a-9aeb-78bd377767e7
+    type: TEXT
+    name: text1
+    parentNodeID: 786f1205-4e8f-42c2-b76d-2ec622d971e6
+    parentSlot: canvas
+    properties:
+      top: '3'
+      left: '2'
+      width: '5'
+      height: '2'
+      overflow: auto
+      onMount: ''
+      onUnmount: ''
+      onClick: ''
+      onDoubleClick: ''
+      onWheel: ''
+      onHover: ''
+      onLeave: ''
+      onFocus: ''
+      onBlur: ''
+  34da000a-5eb8-4f73-b361-e6afef7d18bc:
+    id: 34da000a-5eb8-4f73-b361-e6afef7d18bc
+    type: BUTTON
+    name: button1
+    parentNodeID: 786f1205-4e8f-42c2-b76d-2ec622d971e6
+    parentSlot: canvas
+    properties:
+      top: '4'
+      left: '7'
+      width: '5'
+      height: '2'
+      onMount: ''
+      onUnmount: ''
+      onClick: ''
+      onDoubleClick: ''
+      onWheel: ''
+      onHover: ''
+      onLeave: ''
+      onFocus: ''
+      onBlur: ''
+      leftIcon: ''
+      rightIcon: ''
+  27929606-afca-4137-9a6c-dea9292ccf25:
+    id: 27929606-afca-4137-9a6c-dea9292ccf25
+    type: FORM
+    name: form1
+    parentNodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
+    parentSlot: canvas
+    slots:
+      canvas:
+        - nodeID: 7f24f85c-defd-41c2-bf50-43adf49d6926
+          orderKey: Zx
+        - nodeID: c1e81210-9eec-4647-bd7b-9682a8bbe010
+          orderKey: Zy
+        - nodeID: 6c952348-bcf6-4547-bea3-b862a9c27b0b
+          orderKey: Zz
+        - nodeID: 00043750-664a-41c8-ad8f-e46b876335ca
+          orderKey: a0
+    properties:
+      top: '6'
+      width: '12'
+      height: '11'
+      borderRadius: 4px
