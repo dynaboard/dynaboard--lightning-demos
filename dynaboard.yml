@@ -1,5 +1,5 @@
-runtimeVersion: 0.2.14
-name: Lightning Demos
+runtimeVersion: 0.3.0
+name: Lightning demos
 description: Signup sheet for weekly lightning demo presentations
 type: com.dynaboard/project
 nodes:
@@ -7,9 +7,6 @@ nodes:
     type: ROOT_NODE
     name: ROOT_NODE
     slots:
-      templates:
-        - nodeID: 786f1205-4e8f-42c2-b76d-2ec622d971e6
-          orderKey: a0
       resources:
         - nodeID: 967c7f4b-983b-41e2-8114-89a25f13fd99
           orderKey: a2
@@ -77,25 +74,6 @@ nodes:
       value: '# ⚡ Dynaboard Lightning Demos'
       renderMode: markdown
       verticalAlign: center
-  34da000a-5eb8-4f73-b361-e6afef7d18bc:
-    type: BUTTON
-    name: button1
-    properties:
-      top: '4'
-      left: '7'
-      width: '5'
-      height: '2'
-      onMount: ''
-      onUnmount: ''
-      onClick: ''
-      onDoubleClick: ''
-      onWheel: ''
-      onHover: ''
-      onLeave: ''
-      onFocus: ''
-      onBlur: ''
-      leftIcon: ''
-      rightIcon: ''
   43512de8-177b-4f6f-bcdc-61a5852c1963:
     type: FUNCTION
     name: listDemosFilter
@@ -118,24 +96,6 @@ nodes:
       debounceMillis: '{{ 0 }}'
       onSuccess: ''
       onFailure: ''
-  49314df0-82a1-459a-9aeb-78bd377767e7:
-    type: TEXT
-    name: text1
-    properties:
-      top: '3'
-      left: '2'
-      width: '5'
-      height: '2'
-      overflow: auto
-      onMount: ''
-      onUnmount: ''
-      onClick: ''
-      onDoubleClick: ''
-      onWheel: ''
-      onHover: ''
-      onLeave: ''
-      onFocus: ''
-      onBlur: ''
   6c952348-bcf6-4547-bea3-b862a9c27b0b:
     type: INPUT
     name: nameInput
@@ -160,15 +120,6 @@ nodes:
         targetNode:
           ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
         actionType: LIST_RECORDS
-  786f1205-4e8f-42c2-b76d-2ec622d971e6:
-    type: TEMPLATE
-    name: template1
-    slots:
-      canvas:
-        - nodeID: 34da000a-5eb8-4f73-b361-e6afef7d18bc
-          orderKey: Zz
-        - nodeID: 49314df0-82a1-459a-9aeb-78bd377767e7
-          orderKey: a0
   7d405878-3db1-4a97-9d49-d7d15e39fb70:
     type: FUNCTION
     name: addSignUpRecord
@@ -177,8 +128,8 @@ nodes:
         key: '{{new Date().toString()}}'
         value: |-
           {
-              "name": "{{nameInput.value}}",
-              "present": "{{presentInput.value}}"
+              name: {{nameInput.value}},
+              present: {{presentInput.value}}
           }
         select: ''
         targetNode:
