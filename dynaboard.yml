@@ -61,7 +61,7 @@ nodes:
       borderRadius: 4px
       onSubmit:
         function:
-          ref: 7d405878-3db1-4a97-9d49-d7d15e39fb70
+          ref: d3654371-1c62-43b9-a0e3-08338969c9df
   33451c27-1db0-4025-9a2d-9a7c9dbdea40:
     type: TEXT
     name: text2
