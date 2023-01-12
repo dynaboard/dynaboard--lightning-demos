@@ -1,6 +1,6 @@
-runtimeVersion: 0.3.0
-name: Lightning demos
-description: Signup sheet for weekly lightning demo presentations
+runtimeVersion: 0.3.4
+name: Lightning Demos
+description: ''
 type: com.dynaboard/project
 nodes:
   ROOT_NODE:
@@ -8,57 +8,91 @@ nodes:
     name: ROOT_NODE
     slots:
       resources:
-        - nodeID: 967c7f4b-983b-41e2-8114-89a25f13fd99
-          orderKey: a2
         - nodeID: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
-          orderKey: a3
+          orderKey: a0
+        - nodeID: 967c7f4b-983b-41e2-8114-89a25f13fd99
+          orderKey: a0
+        - nodeID: 930aee59-f712-4f51-989c-5faffd2d8c97
+          orderKey: a2
       pages:
         - nodeID: e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93
           orderKey: a0
+      components:
+        - nodeID: 786f1205-4e8f-42c2-b76d-2ec622d971e6
+          orderKey: a0
+      config:
+        - nodeID: fd89201d-0c56-465a-9ae1-e28a03ef8c8a
+          orderKey: a0
+    properties:
+      selectedTheme: null
+      showDynaboardBranding: '{{false}}'
+      robotsTxt: null
+      timezone: America
   00043750-664a-41c8-ad8f-e46b876335ca:
     type: TEXT
     name: text1
     properties:
       overflow: auto
       width: '12'
-      height: '4'
+      height: '3'
       overflowX: hidden
       overflowY: hidden
       value: '### Sign-up'
       renderMode: markdown
-      verticalAlign: center
+  0d9871e6-1497-4092-8b58-d9c4542fb0cc:
+    type: FUNCTION
+    name: delete
+    properties:
+      action:
+        key: '{{dataTable1.selectedRow.Date}}'
+        targetNode:
+          ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
+        actionType: DELETE_RECORD
+      onSuccess:
+        function:
+          ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
   152f4d81-531d-4b52-8544-f71bb0325602:
     type: BUTTON
     name: button2
     properties:
-      left: '12'
-      width: '1'
+      top: '3'
+      left: '35'
+      width: '6'
       height: '2'
       text: Refresh
-      leftIcon: ''
+      leftIcon: CountdownTimerIcon
       rightIcon: ''
-      backgroundColor: accent.purple.400
+      backgroundColor: text.muted
       onClick:
         function:
           ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
+      variant: outline
   27929606-afca-4137-9a6c-dea9292ccf25:
     type: FORM
     name: form1
     slots:
       canvas:
         - nodeID: 7f24f85c-defd-41c2-bf50-43adf49d6926
-          orderKey: Zx
+          orderKey: a0
         - nodeID: c1e81210-9eec-4647-bd7b-9682a8bbe010
-          orderKey: Zy
+          orderKey: a0
         - nodeID: 6c952348-bcf6-4547-bea3-b862a9c27b0b
-          orderKey: Zz
+          orderKey: a0
         - nodeID: 00043750-664a-41c8-ad8f-e46b876335ca
           orderKey: a0
     properties:
       top: '6'
-      width: '12'
-      height: '11'
-      borderRadius: 4px
+      width: '40'
+      height: '10'
+      styles: |-
+        element.styles {
+          border-top-color: {{BrandColor.value}};
+          border-top-style: solid;
+          border-top-width: 10px;
+        }
+      gridRows: '0'
+      gridRowHeight: '16'
+      borderRadius: 12px
       onSubmit:
         function:
           ref: d3654371-1c62-43b9-a0e3-08338969c9df
@@ -66,14 +100,14 @@ nodes:
     type: TEXT
     name: text2
     properties:
-      overflow: auto
-      width: '11'
-      height: '5'
+      overflow: hidden
+      width: '34'
+      height: '4'
       overflowX: hidden
       overflowY: hidden
-      value: '# ⚡ Dynaboard Lightning Demos'
+      value: '# ⚡ Lightning Demos'
       renderMode: markdown
-      verticalAlign: center
+      isVisible: true
   43512de8-177b-4f6f-bcdc-61a5852c1963:
     type: FUNCTION
     name: listDemosFilter
@@ -100,11 +134,10 @@ nodes:
     type: INPUT
     name: nameInput
     properties:
-      top: '5'
+      top: '4'
       width: '3'
       height: '4'
       label: Name
-      labelStyle: top
       leftIcon: ''
       rightIcon: ''
       onFocus: ''
@@ -115,6 +148,7 @@ nodes:
     properties:
       callingSemantics: REACTIVE
       action:
+        pattern: ''
         keys: ''
         select: ''
         targetNode:
@@ -144,21 +178,23 @@ nodes:
     type: BUTTON
     name: button1
     properties:
-      top: '6'
+      top: '5'
       left: '11'
       width: '2'
       height: '3'
       text: Submit
-      backgroundColor: accent.purple.400
+      backgroundColor: '{{BrandColor.value}}'
       onClick: null
+      leftIcon: CheckIcon
   80dad1d7-398a-44d1-b723-da3c7c8fa1bd:
     type: DATA_TABLE
     name: data_table2
     properties:
-      top: '20'
-      width: '12'
-      height: '19'
-      data: '{{todaysDemos.data}}'
+      top: '19'
+      width: '40'
+      height: '20'
+      data: '{{shuffleTodaysList.data}}'
+      lockColumns: '{{false}}'
       columns:
         - header: Date
           accessor: Date
@@ -198,16 +234,19 @@ nodes:
       selectedRowIndex: ''
       onSelectRow: ''
       onDeselectRow: ''
+      pageSize: auto
       totalRowCount: '100'
   852e186a-616e-4235-9081-f010a6b819ad:
     type: SPINNER
     name: spinner1
     properties:
       isVisible: '{{listDemos.loading}}'
-      top: '3'
-      left: '12'
-      width: '1'
-      height: '3'
+      left: '35'
+      width: '6'
+      height: '2'
+  930aee59-f712-4f51-989c-5faffd2d8c97:
+    type: RESOURCE/BROWSER
+    name: browser1
   967c7f4b-983b-41e2-8114-89a25f13fd99:
     type: RESOURCE/TYPESCRIPT_CLIENT
     name: typescript_client1
@@ -215,13 +254,13 @@ nodes:
     type: TEXT
     name: text3
     properties:
-      top: '18'
-      width: '12'
+      top: '17'
+      width: '34'
       height: '2'
       overflow: auto
       value: Today's Demos
       fontSize: xl
-      textDecorationLine: underline
+      fontWeight: bold
   a51cd4f0-9d89-4c97-ba45-e20522cdfa61:
     type: RESOURCE/KVSTORE
     name: kvstore1
@@ -239,8 +278,7 @@ nodes:
               return typeof entry.value !== 'string' && (new Date(entry.createdAt) > today)
             }
           ).map(d => {
-              console.log(JSON.stringify(d.value))
-              return {
+                  return {
                   Date: d.key,
                   Who: d.value.name,
                   Demo: d.value.present
@@ -251,34 +289,42 @@ nodes:
       callingSemantics: REACTIVE
       onSuccess: ''
       onFailure: ''
+  bd28231a-9cd1-4b75-b2d4-c0b55ebd9b35:
+    type: FUNCTION
+    name: function1
+    properties:
+      action:
+        targetNode: {}
   c1e81210-9eec-4647-bd7b-9682a8bbe010:
     type: INPUT
     name: presentInput
     properties:
-      top: '5'
+      top: '4'
       left: '4'
       width: '4'
       height: '4'
       label: What would you like to present?
-      labelStyle: top
       leftIcon: ''
       rightIcon: ''
       onFocus: ''
       onBlur: ''
-  c6eb633b-6db6-45a3-bfe9-97ff482344f0:
-    type: DATA_TABLE
-    name: data_table1
+  cb64be34-81f4-4d88-a026-0723b38c8a7e:
+    type: BUTTON
+    name: shuffle
     properties:
-      top: '42'
-      width: '12'
-      height: '17'
-      data: '{{listDemosFilter.data}}'
-      allowDownload: '{{true}}'
-      downloadFormat: JSON
-      selectedRowIndex: ''
-      onSelectRow: ''
-      onDeselectRow: ''
-      totalRowCount: '100'
+      top: '17'
+      left: '35'
+      width: '8'
+      height: '2'
+      onClick:
+        function:
+          ref: d76053f6-6975-4729-ad8c-2f66046739d0
+      text: Shuffle order
+      textColor: text.primary
+      padding: 0px
+      backgroundColor: text.muted
+      variant: outline
+      leftIcon: ShuffleIcon
   d3654371-1c62-43b9-a0e3-08338969c9df:
     type: FUNCTION
     name: addSignUp
@@ -294,48 +340,65 @@ nodes:
       debounceMillis: '{{ 0 }}'
       onSuccess: ''
       onFailure: ''
-  df5c62e0-9076-45aa-b3d3-a73ca412fa9c:
-    type: INLINE_REACT
-    name: inline_react1
+  d4560c46-300e-409e-8b2f-1fe1b401d67b:
+    type: TEXT
+    name: text4
     properties:
       top: '40'
-      width: '12'
+      width: '40'
       height: '2'
-      componentSource: |-
-        const styles = {
-            height: "100%",
-            
-        }
+      overflow: auto
+      value: Previous Demos
+      fontSize: xl
+      fontWeight: bold
+  d76053f6-6975-4729-ad8c-2f66046739d0:
+    type: FUNCTION
+    name: shuffleTodaysList
+    properties:
+      action:
+        code: |2-
+            let array = {{todaysDemos.data}}
 
-        return function Component() {
-          return (<div>
-                <hr />
-            </div>
-          )
-        }
+           for (var i = array.length - 1; i > 0; i--) {
+                  var j = Math.floor(Math.random() * (i + 1));
+                  var temp = array[i];
+                  array[i] = array[j];
+                  array[j] = temp;
+              }
+          return array
+        targetNode:
+          ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
+        actionType: CALL_CLIENT_FUNCTION
+      callingSemantics: REACTIVE
   e77c5e6d-21e0-4fe3-9b4d-a0bc57a09b93:
     type: PAGE
     name: index
     slots:
       canvas:
-        - nodeID: 27929606-afca-4137-9a6c-dea9292ccf25
-          orderKey: Zy
+        - nodeID: f7ff8539-d3a4-4c84-96d5-b064a427ee70
+          orderKey: Zr
+        - nodeID: cb64be34-81f4-4d88-a026-0723b38c8a7e
+          orderKey: ZsV
+        - nodeID: 77aad0fc-2c1f-4945-9953-d9541b59e0db
+          orderKey: ZtV
+        - nodeID: d4560c46-300e-409e-8b2f-1fe1b401d67b
+          orderKey: Zu
         - nodeID: 9fed30eb-735c-4607-89b7-eddde2137bb4
-          orderKey: Zz
+          orderKey: a0
+        - nodeID: 27929606-afca-4137-9a6c-dea9292ccf25
+          orderKey: a0
         - nodeID: 152f4d81-531d-4b52-8544-f71bb0325602
           orderKey: a0
-        - nodeID: df5c62e0-9076-45aa-b3d3-a73ca412fa9c
-          orderKey: a0
         - nodeID: 852e186a-616e-4235-9081-f010a6b819ad
-          orderKey: a2
+          orderKey: a0
         - nodeID: 33451c27-1db0-4025-9a2d-9a7c9dbdea40
           orderKey: a3
         - nodeID: 80dad1d7-398a-44d1-b723-da3c7c8fa1bd
           orderKey: a4V
-        - nodeID: c6eb633b-6db6-45a3-bfe9-97ff482344f0
-          orderKey: a5
       functions:
         - nodeID: 43512de8-177b-4f6f-bcdc-61a5852c1963
+          orderKey: a0
+        - nodeID: a6d916b8-3a8f-498c-b528-110d679a9174
           orderKey: a0
         - nodeID: d3654371-1c62-43b9-a0e3-08338969c9df
           orderKey: a1
@@ -343,9 +406,99 @@ nodes:
           orderKey: a2
         - nodeID: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
           orderKey: a3
-        - nodeID: a6d916b8-3a8f-498c-b528-110d679a9174
+        - nodeID: d76053f6-6975-4729-ad8c-2f66046739d0
           orderKey: a4
+        - nodeID: bd28231a-9cd1-4b75-b2d4-c0b55ebd9b35
+          orderKey: a5
+        - nodeID: 0d9871e6-1497-4092-8b58-d9c4542fb0cc
+          orderKey: a6
     properties:
+      minHeight: 1004px
       padding: 16px
       spacing: 16px
+      gridColumns: '40'
       gridRowHeight: 16px
+      includeInSitemap: true
+  f7ff8539-d3a4-4c84-96d5-b064a427ee70:
+    type: DATA_TABLE
+    name: dataTable1
+    properties:
+      top: '42'
+      width: '40'
+      height: '19'
+      styles: |-
+        button {
+          background: red.600;
+        }
+
+        button:hover {
+          background: red.800;
+        }
+      data: |-
+        {{
+          listDemosFilter.data.sort(
+            (a, b) => Date.parse(b.Date) - Date.parse(a.Date)
+          )
+        }}
+      autoColumns: false
+      columns:
+        - header: Date
+          accessor: Date
+          id: 4f62eb17-64bb-4d9d-95af-51d3a09551e5
+          width: 32
+          minWidth: 15
+          renderAs: default
+          dateTimeFormat: MMMM dd, y 'at' ttt
+          widthUnit: '%'
+          minWidthUnit: '%'
+          isVisible: 'true'
+          allowSortBy: 'true'
+          buttonText: Button
+          onButtonClick: null
+        - header: Who
+          accessor: Who
+          id: 2d1d0afc-bf79-48f4-a923-aebf5b3aad4a
+          width: 13
+          minWidth: 15
+          renderAs: default
+          dateTimeFormat: MMMM dd, y 'at' ttt
+          widthUnit: '%'
+          minWidthUnit: '%'
+          isVisible: 'true'
+          allowSortBy: 'true'
+          buttonText: Button
+          onButtonClick: null
+        - header: Demo
+          accessor: Demo
+          id: 46124eb7-a027-46d5-a38a-5e2745433621
+          width: 27
+          minWidth: 15
+          renderAs: default
+          dateTimeFormat: MMMM dd, y 'at' ttt
+          widthUnit: '%'
+          minWidthUnit: '%'
+          isVisible: 'true'
+          allowSortBy: 'true'
+          buttonText: Button
+          onButtonClick: null
+        - header: Actions
+          accessor: ''
+          id: 76469f0e-e867-43aa-a3dc-a596267d0250
+          width: 0
+          minWidth: 15
+          renderAs: button
+          dateTimeFormat: MMMM dd, y 'at' ttt
+          widthUnit: '%'
+          minWidthUnit: '%'
+          isVisible: 'true'
+          allowSortBy: 'true'
+          buttonText: Delete
+          onButtonClick:
+            function:
+              ref: 0d9871e6-1497-4092-8b58-d9c4542fb0cc
+      pageSize: auto
+  fd89201d-0c56-465a-9ae1-e28a03ef8c8a:
+    type: CONFIG
+    name: BrandColor
+    properties:
+      value: purple.500
