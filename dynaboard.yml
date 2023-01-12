@@ -44,7 +44,7 @@ nodes:
     name: delete
     properties:
       action:
-        key: '{{dataTable1.selectedRow.Date}}'
+        key: '{{dataTable1.selectedRow?.Date}}'
         targetNode:
           ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
         actionType: DELETE_RECORD
@@ -356,16 +356,9 @@ nodes:
     name: shuffleTodaysList
     properties:
       action:
-        code: |2-
-            let array = {{todaysDemos.data}}
-
-           for (var i = array.length - 1; i > 0; i--) {
-                  var j = Math.floor(Math.random() * (i + 1));
-                  var temp = array[i];
-                  array[i] = array[j];
-                  array[j] = temp;
-              }
-          return array
+        code: |-
+          let array = {{todaysDemos.data}}
+          return _.shuffle(array)
         targetNode:
           ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
         actionType: CALL_CLIENT_FUNCTION
