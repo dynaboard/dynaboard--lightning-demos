@@ -1,4 +1,4 @@
-runtimeVersion: 0.3.4
+runtimeVersion: 0.3.5
 name: Lightning Demos
 description: ''
 type: com.dynaboard/project
@@ -41,7 +41,7 @@ nodes:
       renderMode: markdown
   0d9871e6-1497-4092-8b58-d9c4542fb0cc:
     type: FUNCTION
-    name: delete
+    name: deleteRecord
     properties:
       action:
         key: '{{dataTable1.selectedRow?.Date}}'
@@ -67,6 +67,7 @@ nodes:
         function:
           ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
       variant: outline
+      textColor: text.primary
   27929606-afca-4137-9a6c-dea9292ccf25:
     type: FORM
     name: form1
@@ -289,12 +290,6 @@ nodes:
       callingSemantics: REACTIVE
       onSuccess: ''
       onFailure: ''
-  bd28231a-9cd1-4b75-b2d4-c0b55ebd9b35:
-    type: FUNCTION
-    name: function1
-    properties:
-      action:
-        targetNode: {}
   c1e81210-9eec-4647-bd7b-9682a8bbe010:
     type: INPUT
     name: presentInput
@@ -401,8 +396,6 @@ nodes:
           orderKey: a3
         - nodeID: d76053f6-6975-4729-ad8c-2f66046739d0
           orderKey: a4
-        - nodeID: bd28231a-9cd1-4b75-b2d4-c0b55ebd9b35
-          orderKey: a5
         - nodeID: 0d9871e6-1497-4092-8b58-d9c4542fb0cc
           orderKey: a6
     properties:
