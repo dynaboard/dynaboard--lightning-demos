@@ -30,7 +30,7 @@ nodes:
       timezone: America
   00043750-664a-41c8-ad8f-e46b876335ca:
     type: TEXT
-    name: text1
+    name: submitFormTitle
     properties:
       overflow: auto
       width: '12'
@@ -44,7 +44,7 @@ nodes:
     name: deleteRecord
     properties:
       action:
-        key: '{{dataTable1.selectedRow?.Date}}'
+        key: '{{previousDemosTable.selectedRow?.Date}}'
         targetNode:
           ref: a51cd4f0-9d89-4c97-ba45-e20522cdfa61
         actionType: DELETE_RECORD
@@ -53,7 +53,7 @@ nodes:
           ref: 718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7
   152f4d81-531d-4b52-8544-f71bb0325602:
     type: BUTTON
-    name: button2
+    name: refreshButton
     properties:
       top: '3'
       left: '35'
@@ -70,17 +70,17 @@ nodes:
       textColor: text.primary
   27929606-afca-4137-9a6c-dea9292ccf25:
     type: FORM
-    name: form1
+    name: submitForm
     slots:
       canvas:
         - nodeID: 7f24f85c-defd-41c2-bf50-43adf49d6926
-          orderKey: a0
+          orderKey: ZzV
         - nodeID: c1e81210-9eec-4647-bd7b-9682a8bbe010
-          orderKey: a0
+          orderKey: ZzG
         - nodeID: 6c952348-bcf6-4547-bea3-b862a9c27b0b
-          orderKey: a0
+          orderKey: ZzO
         - nodeID: 00043750-664a-41c8-ad8f-e46b876335ca
-          orderKey: a0
+          orderKey: Zz
     properties:
       top: '6'
       width: '40'
@@ -99,7 +99,7 @@ nodes:
           ref: d3654371-1c62-43b9-a0e3-08338969c9df
   33451c27-1db0-4025-9a2d-9a7c9dbdea40:
     type: TEXT
-    name: text2
+    name: pageTitle
     properties:
       overflow: hidden
       width: '34'
@@ -143,7 +143,10 @@ nodes:
       rightIcon: ''
       onFocus: ''
       onBlur: ''
+      accessoryLeft: icon
+      accessoryLeftIcon: PersonIcon
       labelStyle: top
+      placeholder: First and Last
   718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7:
     type: FUNCTION
     name: listDemos
@@ -178,7 +181,7 @@ nodes:
       onFailure: ''
   7f24f85c-defd-41c2-bf50-43adf49d6926:
     type: BUTTON
-    name: button1
+    name: submitButton
     properties:
       top: '5'
       left: '11'
@@ -190,7 +193,7 @@ nodes:
       leftIcon: CheckIcon
   80dad1d7-398a-44d1-b723-da3c7c8fa1bd:
     type: DATA_TABLE
-    name: data_table2
+    name: todaysDemosTable
     properties:
       top: '19'
       width: '40'
@@ -240,7 +243,7 @@ nodes:
       totalRowCount: '100'
   852e186a-616e-4235-9081-f010a6b819ad:
     type: SPINNER
-    name: spinner1
+    name: loadingSpinner
     properties:
       isVisible: '{{listDemos.loading}}'
       left: '35'
@@ -248,13 +251,13 @@ nodes:
       height: '2'
   930aee59-f712-4f51-989c-5faffd2d8c97:
     type: RESOURCE/BROWSER
-    name: browser1
+    name: browser
   967c7f4b-983b-41e2-8114-89a25f13fd99:
     type: RESOURCE/TYPESCRIPT_CLIENT
-    name: typescript_client1
+    name: scripting
   9fed30eb-735c-4607-89b7-eddde2137bb4:
     type: TEXT
-    name: text3
+    name: todaysDemosTitle
     properties:
       top: '17'
       width: '34'
@@ -265,7 +268,7 @@ nodes:
       fontWeight: bold
   a51cd4f0-9d89-4c97-ba45-e20522cdfa61:
     type: RESOURCE/KVSTORE
-    name: kvstore1
+    name: kvStore
   a6d916b8-3a8f-498c-b528-110d679a9174:
     type: FUNCTION
     name: todaysDemos
@@ -304,10 +307,13 @@ nodes:
       rightIcon: ''
       onFocus: ''
       onBlur: ''
+      accessoryLeft: icon
+      accessoryLeftIcon: ArchiveIcon
       labelStyle: top
+      placeholder: Something awesome
   cb64be34-81f4-4d88-a026-0723b38c8a7e:
     type: BUTTON
-    name: shuffle
+    name: shuffleButton
     properties:
       top: '17'
       left: '35'
@@ -339,7 +345,7 @@ nodes:
       onFailure: ''
   d4560c46-300e-409e-8b2f-1fe1b401d67b:
     type: TEXT
-    name: text4
+    name: previousDemosTitle
     properties:
       top: '40'
       width: '40'
@@ -409,7 +415,7 @@ nodes:
       includeInSitemap: true
   f7ff8539-d3a4-4c84-96d5-b064a427ee70:
     type: DATA_TABLE
-    name: dataTable1
+    name: previousDemosTable
     properties:
       top: '42'
       width: '40'
