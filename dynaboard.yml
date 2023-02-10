@@ -143,6 +143,7 @@ nodes:
       rightIcon: ''
       onFocus: ''
       onBlur: ''
+      labelStyle: top
   718db0c6-06a5-4eda-b4fa-4cd8fa0f7fd7:
     type: FUNCTION
     name: listDemos
@@ -296,13 +297,14 @@ nodes:
     properties:
       top: '4'
       left: '4'
-      width: '4'
+      width: '5'
       height: '4'
       label: What would you like to present?
       leftIcon: ''
       rightIcon: ''
       onFocus: ''
       onBlur: ''
+      labelStyle: top
   cb64be34-81f4-4d88-a026-0723b38c8a7e:
     type: BUTTON
     name: shuffle
