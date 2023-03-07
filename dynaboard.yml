@@ -1,4 +1,4 @@
-runtimeVersion: 0.3.5
+runtimeVersion: 0.4.0
 name: Lightning Demos
 description: ''
 type: com.dynaboard/project
@@ -108,27 +108,25 @@ nodes:
       overflowY: hidden
       value: '# ⚡ Lightning Demos'
       renderMode: markdown
-      isVisible: true
   43512de8-177b-4f6f-bcdc-61a5852c1963:
     type: FUNCTION
     name: listDemosFilter
     properties:
       action:
-        code: >-
-          return {{listDemos.data}}.filter(d => typeof d.value !==
-          'string').map(d => {
-              console.log(JSON.stringify(d.value))
+        code: |-
+          return {{ listDemos.data }}
+            .filter((d) => typeof d.value !== "string")
+            .map((d) => {
               return {
-                  Date: d.key,
-                  Who: d.value.name,
-                  Demo: d.value.present
+                Date: d.key,
+                Who: d.value.name,
+                Demo: d.value.present,
               }
-          })
+            })
         targetNode:
           ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
         actionType: CALL_CLIENT_FUNCTION
       callingSemantics: REACTIVE
-      debounceMillis: '{{ 0 }}'
       onSuccess: ''
       onFailure: ''
   6c952348-bcf6-4547-bea3-b862a9c27b0b:
@@ -198,7 +196,7 @@ nodes:
       top: '19'
       width: '40'
       height: '20'
-      data: '{{shuffleTodaysList.data}}'
+      data: shuffleTodaysList.data
       lockColumns: '{{false}}'
       columns:
         - header: Date
@@ -278,16 +276,19 @@ nodes:
           const today = new Date()
           today.setHours(0, 0, 0, 0)
 
-          const d = {{listDemos.data}}
-          return d.filter((entry) => {
-              return typeof entry.value !== 'string' && (new Date(entry.createdAt) > today)
-            }
-          ).map(d => {
-                  return {
-                  Date: d.key,
-                  Who: d.value.name,
-                  Demo: d.value.present
-              }}).reverse()
+          const d = {{ listDemos.data }}
+          return d
+            .filter((entry) => {
+              return typeof entry.value !== "string" && new Date(entry.createdAt) > today
+            })
+            .map((d) => {
+              return {
+                Date: d.key,
+                Who: d.value.name,
+                Demo: d.value.present,
+              }
+            })
+            .reverse()
         targetNode:
           ref: 967c7f4b-983b-41e2-8114-89a25f13fd99
         actionType: CALL_CLIENT_FUNCTION
@@ -412,7 +413,10 @@ nodes:
       spacing: 16px
       gridColumns: '40'
       gridRowHeight: 16px
-      includeInSitemap: true
+      headerProps: {}
+      leftSidebarProps: {}
+      rightSidebarProps: {}
+      footerProps: {}
   f7ff8539-d3a4-4c84-96d5-b064a427ee70:
     type: DATA_TABLE
     name: previousDemosTable
@@ -428,12 +432,9 @@ nodes:
         button:hover {
           background: red.800;
         }
-      data: |-
-        {{
-          listDemosFilter.data.sort(
-            (a, b) => Date.parse(b.Date) - Date.parse(a.Date)
-          )
-        }}
+      data: >-
+        listDemosFilter.data.sort((a, b) => Date.parse(b.Date) -
+        Date.parse(a.Date))
       autoColumns: false
       columns:
         - header: Date
